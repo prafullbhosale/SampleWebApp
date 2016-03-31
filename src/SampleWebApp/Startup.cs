@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using SampleWebApp.Models;
+using SampleWebApp.Data;
 
 namespace SampleWebApp
 {
@@ -41,6 +42,11 @@ namespace SampleWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AuthorDataContext>(options =>
+                    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AuthorDataContext-9a1d8034-a6d6-4cdb-bf59-77e85aad38ac;Trusted_Connection=True;MultipleActiveResultSets=true"));
+
+            services.AddDbContext<BookDataContext>(options =>
+                    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BookDataContext-586e0d4b-10df-4ce2-b3a7-8d98621d6dcf;Trusted_Connection=True;MultipleActiveResultSets=true"));
             // Add framework services.
         }
 
